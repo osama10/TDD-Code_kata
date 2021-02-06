@@ -7,27 +7,11 @@
 //
 
 import XCTest
-
+@testable import TestingTimeTDD
 // Test code in your main module when dynamically linking unit tests
 // @testable import TestingTimeTDD
 
-struct TrialPeriod {
-    var expiredDate: Date
 
-    init(_ expiredDate: Date) {
-        self.expiredDate = expiredDate
-    }
-
-    func isExpired() -> Bool {
-        expiredDate < Date()
-    }
-
-    mutating func reset() {
-        /// assuming it will reset it for 5 more days
-        let timeUtil  = TimeTraveler(date: expiredDate)
-        expiredDate = timeUtil.timeTravelBy(days: 5)
-    }
-}
 
 class TrialPeriodTests: XCTestCase {
 

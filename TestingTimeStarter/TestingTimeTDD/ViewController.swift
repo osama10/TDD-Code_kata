@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
-//    let trial = TrialPeriod()
+    let trial = TrialPeriod(TimeTraveler(date: Date()).timeTravelBy(days: 7))
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,11 +23,11 @@ class ViewController: UIViewController {
         // Demo
         showTrialDialogWithExpiration(Date())
         
-//        if trial.isExpired() {
-//            showPurchaseDialog()
-//        } else {
-//            showTrialDialogWithExpiration(trial.dateExpired)
-//        }
+        if trial.isExpired() {
+            showPurchaseDialog()
+        } else {
+            showTrialDialogWithExpiration(trial.expiredDate)
+        }
 
     }
 
