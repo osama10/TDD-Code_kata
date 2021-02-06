@@ -25,7 +25,7 @@ class TimeTraveler {
         date = date.addingTimeInterval(seconds)
     }
     
-    func timeTravelBy(days: Int) {
-        date = Calendar.current.date(byAdding: .day, value: days, to: date)!
+    func timeTravelBy(days: Int) -> Date {
+        return Calendar.current.date(byAdding: .day, value: days, to: date)!
     }
 }
