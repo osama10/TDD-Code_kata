@@ -12,7 +12,7 @@ import XCTest
 // @testable import TestingTimeTDD
 
 struct TrialPeriod {
-    let expiredDate: Date
+    var expiredDate: Date
 
     init(_ expiredDate: Date) {
         self.expiredDate = expiredDate
@@ -20,6 +20,12 @@ struct TrialPeriod {
 
     func isExpired() -> Bool {
         expiredDate < Date()
+    }
+
+    mutating func reset() {
+        /// assuming it will reset it for 5 more days
+        let timeUtil  = TimeTraveler(date: expiredDate)
+        expiredDate = timeUtil.timeTravelBy(days: 5)
     }
 }
 
@@ -30,7 +36,6 @@ class TrialPeriodTests: XCTestCase {
     func test_trial_peroid_should_expire_when_past_expired_date() {
         let timeTraverler = TimeTraveler(date: Date())
         let expiredDate = timeTraverler.timeTravelBy(days: -1)
-
         let trial = TrialPeriod(expiredDate)
         XCTAssertTrue(trial.isExpired())
     }
@@ -38,21 +43,31 @@ class TrialPeriodTests: XCTestCase {
     func test_trial_peroid_should_not_expire_when_not_past_expired_date() {
         let timeTraverler = TimeTraveler(date: Date())
         let expiredDate = timeTraverler.timeTravelBy(days: 1)
-
         let trial = TrialPeriod(expiredDate)
         XCTAssertFalse(trial.isExpired())
     }
 
-    func testArrangeActAssert() {
-        // Arrange
-        let x = 20
-        let y = 40
-        let expected = 60
+    func test_when_reset_trial_period_then_it_reset() {
+        let timeTraverler = TimeTraveler(date: Date())
+        var trialPeriod = TrialPeriod(timeTraverler.date)
+        let newExpiredData = timeTraverler.timeTravelBy(days: 5)
+        trialPeriod.reset()
+        XCTAssertEqual(trialPeriod.expiredDate, newExpiredData)
+    }
 
-        // Act
-        let actual = x + y
+    func test_reset_when_trial_period_is_less_than_5_days() {
+        let timeTraverler = TimeTraveler(date: Date())
+        var trialPeriod = TrialPeriod(timeTraverler.date)
+        let newExpiredData = timeTraverler.timeTravelBy(days: 3)
+        trialPeriod.reset()
+        XCTAssertNotEqual(trialPeriod.expiredDate, newExpiredData)
+    }
 
-        // Assert
-        XCTAssertEqual(expected, actual)
+    func test_reset_when_trial_period_is_more_than_5_days() {
+        let timeTraverler = TimeTraveler(date: Date())
+        var trialPeriod = TrialPeriod(timeTraverler.date)
+        let newExpiredData = timeTraverler.timeTravelBy(days: 8)
+        trialPeriod.reset()
+        XCTAssertNotEqual(trialPeriod.expiredDate, newExpiredData)
     }
 }
