@@ -11,10 +11,6 @@ import Foundation
 struct TrialPeriod {
     var expiredDate: Date
 
-    init(_ expiredDate: Date) {
-        self.expiredDate = expiredDate
-    }
-
     func isExpired() -> Bool {
         expiredDate < Date()
     }
