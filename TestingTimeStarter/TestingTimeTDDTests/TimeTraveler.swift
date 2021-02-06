@@ -12,19 +12,19 @@ import Foundation
 
 class TimeTraveler {
     var date: Date
-    
+
     init(date: Date = Date()) {
         self.date = date
     }
-    
+
     func generateDate() -> Date {
         return date
     }
-    
+
     func timeTravelBy(seconds: TimeInterval) {
         date = date.addingTimeInterval(seconds)
     }
-    
+
     func timeTravelBy(days: Int) -> Date {
         return Calendar.current.date(byAdding: .day, value: days, to: date)!
     }
