@@ -67,3 +67,10 @@ class ViewController: UIViewController {
     }
 }
 
+
+class TrialClass {
+    func isExpired() -> Bool {
+        let now = Date()
+        
+    }
+}

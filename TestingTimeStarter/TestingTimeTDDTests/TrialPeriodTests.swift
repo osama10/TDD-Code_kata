@@ -9,7 +9,7 @@
 import XCTest
 
 // Test code in your main module when dynamically linking unit tests
-//@testable import TestingTimeTDD
+@testable import TestingTimeTDD
 
 
 
@@ -29,4 +29,16 @@ class TrialPeriodTests: XCTestCase {
         // Assert
         XCTAssertEqual(expected, actual)
     }
+    
+    func testExpiredTrialPeriod() {
+        // given
+        let trialClass = TrialClass()
+        
+        // when
+        let trialExpired = trialClass.isExpired()
+        //then
+    }
+    // is active trail period
+    
+    // is expire trail
 }
